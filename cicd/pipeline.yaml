@@ -72,5 +72,3 @@ name: github_ssh_key
 get:
   path: github-ssh-keys
   name: id_rsa
-
-
