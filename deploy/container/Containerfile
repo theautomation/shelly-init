@@ -1,6 +1,10 @@
-FROM ubuntu:22.10
+FROM alpine:3
 
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
+    bash \
     curl \
-    jq \
- && apt-get clean && rm -rf /var/lib/apt/lists/*
+    jq
+
+COPY /src/shelly-init.sh /home/
+
+ENTRYPOINT ["/bin/bash"]
