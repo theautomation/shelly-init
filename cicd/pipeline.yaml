@@ -28,9 +28,9 @@ steps:
       FORMAT: "oci"
       CONTEXT: "."
       TLSVERIFY: "false"
-      USERNAME: "robot$library+drone"
+      USERNAME: "robot-k8s+drone-ci"
       PASSWORD:
-        from_secret: harbor_registry_password
+        from_secret: harbor_registry_drone_password
     commands:
       - |
         echo "Build image..."
@@ -56,10 +56,10 @@ steps:
 
 ---
 kind: secret
-name: harbor_registry_password
+name: harbor_registry_drone_password
 get:
   path: harbor-registry-drone-password
-  name: DRONE_PASSWORD
+  name: harbor-robot-password
 
 ---
 kind: secret
