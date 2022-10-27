@@ -1,4 +1,4 @@
-FROM docker.io/bullseye-20221004-slim
+FROM bullseye-20221004-slim
 
 RUN apt-get update && apt-get install \
     curl \
