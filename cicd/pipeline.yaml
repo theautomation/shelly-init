@@ -35,7 +35,7 @@ steps:
     commands:
       - |
         echo "Build image..."
-        buildah --network=host --storage-driver=$${STORAGE_DRIVER} bud --format=$${FORMAT} \
+        buildah --storage-driver=$${STORAGE_DRIVER} bud --format=$${FORMAT} \
         --tls-verify=$${TLSVERIFY} --no-cache \
         -f $${CONTAINERFILE} \
         -t $${REGISTRY_HOST}/$${DRONE_REPO_NAME}:latest \
