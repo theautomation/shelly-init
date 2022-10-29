@@ -21,6 +21,7 @@ steps:
   - name: build and push image
     image: quay.io/buildah/stable
     privileged: true
+    network_mode: host
     environment:
       REGISTRY_HOST: "harbor.k8s.lan/k8s"
       CONTAINERFILE: "./deploy/container/Containerfile"
