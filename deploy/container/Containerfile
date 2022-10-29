@@ -4,6 +4,6 @@ RUN apt-get update && apt-get install -y \
     curl \
     jq
 
-COPY /src/shelly-init.sh /home/
+COPY /src/ /home/
 
 ENTRYPOINT ["/bin/bash"]
