@@ -68,9 +68,6 @@ trigger:
     - success
     - failure
 
-depends_on:
-  - build
-
 steps:
   - name: slack
     image: plugins/slack
