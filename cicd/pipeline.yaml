@@ -73,8 +73,8 @@ steps:
       {{else}}
         build {{build.number}} failed.
       {{/success}}
-    when:
-      status: [success, failure]
+    # when:
+    #   status: [success, failure]
 
 ---
 kind: secret
