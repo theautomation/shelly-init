@@ -68,14 +68,20 @@ steps:
         from_secret: slack_webhook_url
       channel: cicd
       icon_url: https://github.com/theautomation/kubernetes-gitops/blob/683af8ceb7cc5188b799686c0053009a934c92de/assets/img/drone-io-icon.png
-      when:
-        status: [ success, failure ]
     template: >
-      {{#success build.status}}
-        build {{build.number}} succeeded.
-      {{else}}
-        build {{build.number}} failed.
-      {{/success}}
+      
+      {{#success build.status}} ✔ {{ else }} :x: {{/success}} {{ uppercasefirst build.status }}: Build #{{ build.number }} * (type: `{{ build.event }}`)
+      
+      Commit: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+
+      Branch: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
+
+      Author: {{ build.author }}      
+
+      Build: <{{ build.link }}| Drone Build {{ build.number }} ↗>
+      
+    when:
+      status: [ success, failure ]
 
 ---
 kind: secret
