@@ -67,14 +67,15 @@ steps:
       webhook:
         from_secret: slack_webhook_url
       channel: cicd
+      icon_url: https://github.com/theautomation/kubernetes-gitops/blob/683af8ceb7cc5188b799686c0053009a934c92de/assets/img/drone-io-icon.png
+      when:
+        status: [ success, failure ]
     template: >
       {{#success build.status}}
         build {{build.number}} succeeded.
       {{else}}
         build {{build.number}} failed.
       {{/success}}
-    # when:
-    #   status: [success, failure]
 
 ---
 kind: secret
