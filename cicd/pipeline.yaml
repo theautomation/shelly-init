@@ -13,12 +13,12 @@ steps:
 kind: template
 load: build.yaml
 data:
-  registry_host: "harbor.k8s.lan/k8s"
-  containerfile: "./deploy/container/Containerfile"
-  storage_driver: "overlay"
-  format: "oci"
-  context: "."
-  tlsverify: "false"
+  registry_host: harbor.k8s.lan/k8s
+  containerfile: ./deploy/container/Containerfile
+  storage_driver: overlay
+  format: oci
+  context: .
+  tlsverify: false
 
 ---
 kind: secret
