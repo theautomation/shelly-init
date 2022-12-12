@@ -56,25 +56,31 @@ steps:
         docker://$${REGISTRY_HOST}/$${DRONE_REPO_NAME}:$${DRONE_BUILD_NUMBER}
 
 ---
-pipeline:
-  slack:
+---
+kind: pipeline
+type: docker
+name: notify
+
+trigger:
+  status:
+    - success
+    - failure
+
+depends_on:
+  - build
+
+steps:
     image: plugins/slack
     settings:
       webhook:
         from_secret: slack_webhook_url
       channel: cicd
-      icon_url: https://github.com/theautomation/kubernetes-gitops/blob/683af8ceb7cc5188b799686c0053009a934c92de/assets/img/drone-io-icon.png
     template: >
-      
-      {{#success build.status}} ✔ {{ else }} :x: {{/success}} {{ uppercasefirst build.status }}: Build #{{ build.number }} * (type: `{{ build.event }}`)
-      
-      Commit: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-
-      Branch: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commits/{{ build.branch }}|{{ build.branch }}>
-
-      Author: {{ build.author }}      
-
-      Build: <{{ build.link }}| Drone Build {{ build.number }} ↗>
+      {{#success build.status}}
+        build {{build.number}} succeeded. Good job.
+      {{else}}
+        build {{build.number}} failed. Fix me please.
+      {{/success}}
       
     when:
       status: [ success, failure ]
