@@ -11,7 +11,7 @@ steps:
 
 ---
 kind: template
-load: build.yaml
+load: build
 data:
   registry_host: harbor.k8s.lan/k8s
   containerfile: ./deploy/container/Containerfile
