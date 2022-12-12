@@ -55,10 +55,13 @@ steps:
         $${REGISTRY_HOST}/$${DRONE_REPO_NAME}:$${DRONE_BUILD_NUMBER} \
         docker://$${REGISTRY_HOST}/$${DRONE_REPO_NAME}:$${DRONE_BUILD_NUMBER}
 
-# ---
-# kind: pipeline
-# type: docker
-# name: notify
+---
+kind: pipeline
+type: docker
+name: build
+
+depends_on:
+  - build
 
 # trigger:
 #   status:
@@ -68,20 +71,20 @@ steps:
 # depends_on:
 #   - build
 
-# steps:
-#   - image: plugins/slack
-#     settings:
-#     webhook:
-#       from_secret: slack_webhook_url
-#     channel: cicd
-#     template: >
-#       {{#success build.status}}
-#         build {{build.number}} succeeded. Good job.
-#       {{else}}
-#         build {{build.number}} failed. Fix me please.
-#       {{/success}}
-#     when:
-#       status: [ success, failure ]
+steps:
+  - image: plugins/slack
+    settings:
+    webhook:
+      from_secret: slack_webhook_url
+    channel: cicd
+    template: >
+      {{#success build.status}}
+        build {{build.number}} succeeded. Good job.
+      {{else}}
+        build {{build.number}} failed. Fix me please.
+      {{/success}}
+    when:
+      status: [ success, failure ]
 
 ---
 kind: secret
