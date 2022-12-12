@@ -69,7 +69,7 @@ depends_on:
   - build
 
 steps:
-    image: plugins/slack
+  - image: plugins/slack
     settings:
       webhook:
         from_secret: slack_webhook_url
