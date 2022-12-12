@@ -77,7 +77,7 @@ steps:
       channel: cicd
       template: >
         {{#success build.status}}
-          build {{build.number}} succeeded.
+          repo: {{repo.name}} build: {{build.number}} succeeded.
         {{else}}
           build {{build.number}} failed.
         {{/success}}
