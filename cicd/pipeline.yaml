@@ -63,10 +63,10 @@ name: notify
 depends_on:
   - build
 
-# trigger:
-#   status:
-#     - success
-#     - failure
+trigger:
+  status:
+    - success
+    - failure
 
 steps:
   - name: slack
@@ -81,8 +81,6 @@ steps:
       {{else}}
         build {{build.number}} failed. Fix me please.
       {{/success}}
-    when:
-      status: [ success, failure ]
 
 ---
 kind: secret
