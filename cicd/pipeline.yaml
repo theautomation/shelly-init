@@ -67,6 +67,12 @@ steps:
       webhook:
         from_secret: slack_webhook_url
       channel: cicd
+    template: >
+      {{#success build.status}}
+        build {{build.number}} succeeded.
+      {{else}}
+        build {{build.number}} failed.
+      {{/success}}
     when:
       status: [success, failure]
 
