@@ -71,16 +71,15 @@ depends_on:
 steps:
   - image: plugins/slack
     settings:
-      webhook:
-        from_secret: slack_webhook_url
-      channel: cicd
+    webhook:
+      from_secret: slack_webhook_url
+    channel: cicd
     template: >
       {{#success build.status}}
         build {{build.number}} succeeded. Good job.
       {{else}}
         build {{build.number}} failed. Fix me please.
       {{/success}}
-      
     when:
       status: [ success, failure ]
 
