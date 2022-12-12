@@ -63,16 +63,17 @@ name: notify
 depends_on:
   - build
 
-# trigger:
-#   status:
-#     - success
-#     - failure
+trigger:
+  status:
+    - success
+    - failure
 
-# depends_on:
-#   - build
+depends_on:
+  - build
 
 steps:
-  - image: plugins/slack
+  - name: slack
+    image: plugins/slack
     settings:
     webhook:
       from_secret: slack_webhook_url
